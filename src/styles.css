@@ -1,0 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f6f7f8;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background: #ff4500;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.post {
+  background: white;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 8px;
+  width: 80%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
