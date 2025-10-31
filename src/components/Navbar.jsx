@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, onSearch }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (onSearch) onSearch(query); 
+  };
+
+ 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    if (onSearch) onSearch(value);
+  };
+
   return (
     <nav
       style={{
@@ -15,12 +29,13 @@ const Navbar = ({ user }) => {
       }}
     >
       <h2>Reddit Clone</h2>
+
       <form onSubmit={handleSearch} style={{ flex: 1, margin: "0 30px" }}>
         <input
           type="text"
           placeholder="Search posts..."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleChange}
           style={{
             width: "100%",
             maxWidth: "400px",
@@ -32,6 +47,8 @@ const Navbar = ({ user }) => {
           }}
         />
       </form>
+
+      {/* 👤 User section */}
       <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         {user && (
           <>
@@ -63,4 +80,3 @@ const Navbar = ({ user }) => {
 };
 
 export default Navbar;
-
