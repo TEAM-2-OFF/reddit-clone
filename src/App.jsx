@@ -14,6 +14,8 @@ function App() {
     });
     return () => unsubscribe();
   }, []);
+  <Navbar user={user} onSearch={(q) => console.log("Search query:", q)} />
+
 
   return (
     <div style={{ background: "#dae0e6", minHeight: "100vh" }}>
