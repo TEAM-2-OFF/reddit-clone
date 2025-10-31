@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, onSearch }) => {
+  const [query, setQuery] = useState("");
+
+ 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (onSearch) onSearch(query);
+  };
+
+  // Handle search input typing
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    if (onSearch) onSearch(value);
+  };
+
   return (
     <nav
       style={{
         backgroundColor: "#FF4500",
-        padding: "10px 20px",
+        padding: "12px 24px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         color: "white",
+        flexWrap: "wrap",
       }}
     >
+     
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <img
           src="https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png"
@@ -24,13 +41,22 @@ const Navbar = ({ user }) => {
             borderRadius: "50%",
             cursor: "pointer",
           }}
-          onClick={() => window.location.reload()} // reloads to homepage
+          onClick={() => window.location.reload()}
         />
         <h2 style={{ margin: 0, fontWeight: "bold", fontSize: "1.5rem" }}>
           Reddit
         </h2>
       </div>
-      <form onSubmit={handleSearch} style={{ flex: 1, margin: "0 30px" }}>
+
+      <form
+        onSubmit={handleSearch}
+        style={{
+          flex: "1 1 50%",
+          display: "flex",
+          justifyContent: "center",
+          margin: "0 40px",
+        }}
+      >
         <input
           type="text"
           placeholder="Search Reddit..."
@@ -38,19 +64,16 @@ const Navbar = ({ user }) => {
           onChange={handleChange}
           style={{
             width: "100%",
-            display: "Flex",
-            maxWidth: "400px",
-            padding: "8px 12px",
-            borderRadius: "6px",
+            maxWidth: "500px",
+            padding: "10px 15px",
+            borderRadius: "8px",
             border: "none",
             outline: "none",
-            fontSize: "15px",
-            margin: " 0 10px",
-            justifyContent: "center",
-            }}
-          />
+            fontSize: "16px",
+            margin: "5px 0",
+          }}
+        />
       </form>
-            
       <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         {user && (
           <>
@@ -69,7 +92,7 @@ const Navbar = ({ user }) => {
                 color: "#FF4500",
                 border: "none",
                 borderRadius: "6px",
-                padding: "5px 10px",
+                padding: "7px 12px",
                 cursor: "pointer",
                 fontWeight: "bold",
               }}
@@ -84,4 +107,3 @@ const Navbar = ({ user }) => {
 };
 
 export default Navbar;
-
