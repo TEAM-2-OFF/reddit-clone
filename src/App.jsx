@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -15,16 +16,15 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // Handle search
+  
   const handleSearch = (query) => {
-    console.log("Search query:", query);
-    // You can pass this query to Feed or trigger an API call
+    setSearchQuery(query);
   };
 
   return (
     <div style={{ background: "#dae0e6", minHeight: "100vh" }}>
       <Navbar user={user} onSearch={handleSearch} />
-      {user ? <Feed /> : <Login />}
+      {user ? <Feed searchQuery={searchQuery} /> : <Login />}
     </div>
   );
 }
