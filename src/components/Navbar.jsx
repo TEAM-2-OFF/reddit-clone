@@ -30,6 +30,27 @@ const Navbar = ({ user }) => {
           Reddit
         </h2>
       </div>
+      <form onSubmit={handleSearch} style={{ flex: 1, margin: "0 30px" }}>
+        <input
+          type="text"
+          placeholder="Search Reddit..."
+          value={query}
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            display: "Flex",
+            maxWidth: "400px",
+            padding: "8px 12px",
+            borderRadius: "6px",
+            border: "none",
+            outline: "none",
+            fontSize: "15px",
+            margin: " 0 10px",
+            justifyContent: "center",
+            }}
+          />
+      </form>
+            
       <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         {user && (
           <>
