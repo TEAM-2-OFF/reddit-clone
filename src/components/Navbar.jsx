@@ -11,7 +11,7 @@ const Navbar = ({ user, onSearch }) => {
     if (onSearch) onSearch(query);
   };
 
-  // Handle search input typing
+ 
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
