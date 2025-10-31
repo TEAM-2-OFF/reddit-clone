@@ -15,6 +15,23 @@ const Navbar = ({ user }) => {
       }}
     >
       <h2>Reddit Clone</h2>
+      <form onSubmit={handleSearch} style={{ flex: 1, margin: "0 30px" }}>
+        <input
+          type="text"
+          placeholder="Search posts..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          style={{
+            width: "100%",
+            maxWidth: "400px",
+            padding: "8px 12px",
+            borderRadius: "6px",
+            border: "none",
+            outline: "none",
+            fontSize: "15px",
+          }}
+        />
+      </form>
       <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         {user && (
           <>
