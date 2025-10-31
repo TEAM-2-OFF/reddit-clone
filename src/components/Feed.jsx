@@ -5,7 +5,7 @@ const Feed = ({ searchQuery }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch top posts from Hacker News
+  
   const fetchHackerNews = async () => {
     try {
       setLoading(true);
@@ -17,7 +17,6 @@ const Feed = ({ searchQuery }) => {
       const storyIds = await response.json();
       const top50 = storyIds.slice(0, 50);
 
-      // Fetch details for each post
       const storyPromises = top50.map((id) =>
         fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((r) =>
           r.json()
@@ -41,7 +40,7 @@ const Feed = ({ searchQuery }) => {
   if (loading) return <p style={{ textAlign: "center" }}>Loading feed...</p>;
   if (error) return <p style={{ color: "red", textAlign: "center" }}>{error}</p>;
 
-  // ✅ Filter posts by search query (case-insensitive)
+  
   const filteredPosts = posts.filter((post) =>
     post.title?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
   );
