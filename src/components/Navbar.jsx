@@ -1,22 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
-const Navbar = ({ user, onSearch }) => {
-  const [query, setQuery] = useState("");
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (onSearch) onSearch(query); 
-  };
-
- 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    if (onSearch) onSearch(value);
-  };
-
+const Navbar = ({ user }) => {
   return (
     <nav
       style={{
@@ -28,31 +14,22 @@ const Navbar = ({ user, onSearch }) => {
         color: "white",
       }}
     >
-      <h2>Reddit Clone</h2>
-
-      <form onSubmit={handleSearch} style={{ flex: 1, margin: "0 30px" }}>
-        <input
-          type="text"
-          placeholder="Search Reddit..."
-          value={query}
-          onChange={handleChange}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <img
+          src="https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png"
+          alt="Reddit Logo"
           style={{
-            
-            width: "100%",
-            display: "Flex",
-            maxWidth: "400px",
-            padding: "8px 12px",
-            borderRadius: "6px",
-            border: "none",
-            outline: "none",
-            fontSize: "15px",
-            margin: " 0 10px",
-            justifyContent: "center",
+            width: "35px",
+            height: "35px",
+            borderRadius: "50%",
+            cursor: "pointer",
           }}
+          onClick={() => window.location.reload()} // reloads to homepage
         />
-      </form>
-
-     
+        <h2 style={{ margin: 0, fontWeight: "bold", fontSize: "1.5rem" }}>
+          Reddit
+        </h2>
+      </div>
       <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
         {user && (
           <>
@@ -60,9 +37,10 @@ const Navbar = ({ user, onSearch }) => {
               src={user.photoURL}
               alt="Profile"
               width="35"
+              height="35"
               style={{ borderRadius: "50%" }}
             />
-            <span>{user.displayName}</span>
+            <span style={{ fontWeight: "500" }}>{user.displayName}</span>
             <button
               onClick={() => signOut(auth)}
               style={{
@@ -72,6 +50,7 @@ const Navbar = ({ user, onSearch }) => {
                 borderRadius: "6px",
                 padding: "5px 10px",
                 cursor: "pointer",
+                fontWeight: "bold",
               }}
             >
               Logout
@@ -84,3 +63,4 @@ const Navbar = ({ user, onSearch }) => {
 };
 
 export default Navbar;
+
