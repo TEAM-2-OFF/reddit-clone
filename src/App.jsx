@@ -14,13 +14,16 @@ function App() {
     });
     return () => unsubscribe();
   }, []);
-  
 
+  // Handle search
+  const handleSearch = (query) => {
+    console.log("Search query:", query);
+    // You can pass this query to Feed or trigger an API call
+  };
 
   return (
     <div style={{ background: "#dae0e6", minHeight: "100vh" }}>
-      <Navbar user={user} />
-      <Navbar user={user} onSearch={(q) => console.log("Search query:", q)} />
+      <Navbar user={user} onSearch={handleSearch} />
       {user ? <Feed /> : <Login />}
     </div>
   );
