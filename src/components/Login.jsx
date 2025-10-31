@@ -27,7 +27,7 @@ export default function Login() {
         </>
       ) : (
         <>
-          <h2>Login to Reddit Clone</h2>
+          <h2>Login to Reddit </h2>
           <button onClick={handleLogin}>Sign in with Google</button>
         </>
       )}
