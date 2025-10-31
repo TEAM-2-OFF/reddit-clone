@@ -15,10 +15,10 @@ const Feed = () => {
       if (!response.ok) throw new Error("Failed to load posts");
 
       const storyIds = await response.json();
-      const top20 = storyIds.slice(0, 20);
+      const top20 = storyIds.slice(0, 50);
 
       // Fetch details for each post
-      const storyPromises = top20.map((id) =>
+      const storyPromises = top50.map((id) =>
         fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((r) =>
           r.json()
         )
